@@ -1,5 +1,5 @@
-# Android Authentication using Sign in with Google, Credential Manager and Firebase Authentication on Kotlin
-In case [original guide](https://developer.android.com/identity/sign-in/credential-manager-siwg#instantiate-sign-in-request) was quite hard for you to master, feel free to use the following template.
+# Android Authentication using Sign in with Google, Credential Manager and Firebase Authentication in Kotlin
+In case [original guide](https://developer.android.com/identity/sign-in/credential-manager-siwg) was quite hard for you to master, feel free to use the following template.
 
 1. In order to sign-in and sign-out, you have to create corresponding buttons.
 
