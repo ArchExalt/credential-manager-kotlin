@@ -1,6 +1,6 @@
 // USER SIGN-IN
 
-package com.exalt.example
+package com.dev.example
 
 import android.content.Context
 import android.content.Intent
