@@ -31,7 +31,7 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.6.1'
 }
 ```
-3. minSdk, targetSdk, compileSdk = 34
+3. minSdk = 34
 4. Add this to your activity for proper use of "is" statements in handleSignIn method:
 ```
     <TextView
