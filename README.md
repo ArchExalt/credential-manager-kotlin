@@ -43,3 +43,46 @@ dependencies {
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 ```
+5. If Firebase authentication works with debug version but not with release one:
+- check in project settings whether RELEASE version also uses signingConfig;
+- check for SHA1 and SHA256 fingeprints added into Firebase project configuration.
+# A proper signing config for a RELEASE version
+build.gradle file:
+```
+android {
+    signingConfigs {
+        release {
+            storeFile file('E:\\Path\\to\\keystore\\keystore.jks')
+            storePassword 'yourpassword'
+            keyPassword 'yourpassword'
+            keyAlias 'key2'
+        }
+    }
+buildTypes {
+        release {
+            minifyEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            debuggable false
+            signingConfig signingConfigs.release
+        }
+    }
+```
+debuggable must be false, once again
+you use key2 alias, explanation is below
+# What to do if you forgot your key/keystore passwords?
+1. Go to Google Console, select "change signing key" and then "from Java storage". Be careful, you gotta use two different key aliases from your keystore.
+2. Install newest [JDK](https://jdk.java.net/22/), execute PowerShell and open the folder with your JDK. For example:
+```
+cd E:\Java\jdk-22.0.1\bin>
+```
+3. Download the public key and PEPK tool under "from Java storage" option (steps 1 and 2).
+4. Use this command to encrypt your private key (step 3). ATTENTION! YOU USE KEY #1 TO ENCRYPT THE PUBLIC KEY.
+```
+.\java -jar "E:\path\to\pepk.jar" --keystore="E:\path\to\keystore.jks" --alias=key1 --output="E:\path\to\output.zip" --include-cert --rsa-aes-encryption --encryption-key-path="E:\path\to\encryption_public_key.pem"
+```
+5. Create a new key alias during release build. Create a new upload key. ATTENTION! YOU USE KEY #2 HERE.
+```
+.\keytool -export -rfc -keystore "E:\path\to\keystore.jks" -alias key2 -file "E:\path\to\encryption_public_key.pem"
+```
+MAJOR WARNING: YOU USE KEY #1 TO ENCRYPT PRIVATE KEY AND KEY #2 AS AN UPLOAD KEY. YOU ALSO USE KEY #2 IN SIGNINGCONFIG AS WELL. ONCE YOU CHANGE KEY ALIAS, SHA1 AND SHA256 CHANGE, SO ADD FINGERPRINTS TO FIREBASE AFTER ALL THE PREVIOUS STEPS.
