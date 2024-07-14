@@ -31,7 +31,7 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.6.1'
 }
 ```
-3. minSdk = 26 because it's the lowest one required for creating a nonce
+3. minSdk = 26 because it's the lowest one required for creating a nonce.
 4. Add this to your activity for proper use of is-statements in handleSignIn method:
 ```
     <TextView
@@ -45,7 +45,7 @@ dependencies {
 ```
 # A proper signing config for a RELEASE version
 1. In case Firebase Authentication works with DEBUG version but not with RELEASE one:
-- check whether RELEASE version also uses signingConfig (project configuration);
+- check whether RELEASE version also uses signingConfig (Android Studio project configuration);
 - check whether there are correct SHA1 and SHA256 fingeprints used (Firebase project configuration).
 2. build.gradle file (pay attention, debuggable = false, keyAlias = key2)
 ```
@@ -69,26 +69,28 @@ buildTypes {
     }
 ```
 # What to do in case you forgot your key/keystore passwords?
-In case [original guide](https://support.google.com/googleplay/android-developer/answer/9842756) was quite hard for you to master, feel free to follow these steps:
-1. Go to Google Console, select "change signing key" and then "from Java storage". Be careful, you gotta use two different key aliases from your keystore, key1 and key2.
-2. Install newest [JDK](https://jdk.java.net/22/) and open the folder with your JDK in PowerShell. For example:
+In case [original guide](https://support.google.com/googleplay/android-developer/answer/9842756) was quite confusing for you, follow these steps:
+1. Go to Google Console, select "change signing key" and then "from Java storage". Be careful, you gotta use ***two different key aliases*** from your keystore, for example, key1 and key2.
+2. Install newest [JDK](https://jdk.java.net/22/), open PowerShell and change the directory. For example:
 ```
 cd E:\Java\jdk-22.0.1\bin
 ```
 3. Download the public key and PEPK tool under "from Java storage" option (steps 1 and 2).
-4. Use the following command to encrypt your private key (step 3). ATTENTION! YOU'LL USE KEY #1 (key1) TO ENCRYPT THE PUBLIC KEY.
+4. Use the following command to encrypt your private key (step 3). ***ATTENTION! YOU'LL USE KEY #1 (key1) TO ENCRYPT THE PUBLIC KEY.***
 ```
 .\java -jar "E:\path\to\pepk.jar" --keystore="E:\path\to\keystore.jks" --alias=key1 --output="E:\path\to\output.zip" --include-cert --rsa-aes-encryption --encryption-key-path="E:\path\to\encryption_public_key.pem"
 ```
 Once finished, upload created zip archive.
 
-5. Create a new key alias (key2) during RELEASE bundle build. Use the following command to create an upload key certificate. ATTENTION! YOU'LL USE KEY #2 HERE.
+5. Create a new key alias (key2) under "build signed bundle/apk" option. Use the following command to create an upload key certificate. ***ATTENTION! YOU'LL USE KEY #2 HERE.***
 ```
 .\keytool -export -rfc -keystore "E:\path\to\keystore.jks" -alias key2 -file "E:\path\to\upload_certificate.pem"
 ```
 Once finished, upload created certificate.
 
-***MAJOR WARNING, ONCE AGAIN: YOU'LL USE KEY #1 TO ENCRYPT PRIVATE KEY AND KEY #2 AS AN UPLOAD KEY. YOU'LL ALSO USE KEY #2 IN SIGNINGCONFIG. ONCE YOU CHANGE KEY ALIAS, SHA1 AND SHA256 WILL ALSO CHANGE, SO ADD FINGERPRINTS TO FIREBASE CONFIGURATION ONLY AFTER COMPLETING ALL THE PREVIOUS STEPS.***
+6. Make sure you don't forget key/keystore passwords anymore, so use a password manager.
+
+***MAJOR WARNING, ONCE AGAIN: YOU'LL USE KEY #1 TO ENCRYPT PRIVATE KEY AND KEY #2 AS AN UPLOAD KEY. YOU'LL ALSO USE KEY #2 IN SIGNINGCONFIG. ONCE YOU CHANGE KEY ALIAS, SHA1 AND SHA256 FINGERPRINTS ALSO WILL BE CHANGED, SO ADD BOTH OF THEM TO FIREBASE CONFIGURATION ONLY AFTER COMPLETING ALL THE PREVIOUS STEPS.***
 
 ---
 ### If these pieces of advice were helpful for you, please share this repo with other devs who may also encountered the same problem. Would appreciate a [humble donation](https://buymeacoffee.com/archexalt) :)
