@@ -45,8 +45,8 @@ dependencies {
 ```
 # A proper signing config for a RELEASE version
 1. In case Firebase Authentication works with DEBUG version but not with RELEASE one:
-- check in project settings whether RELEASE version also uses signingConfig;
-- check for correct SHA1 and SHA256 fingeprints added into Firebase project configuration.
+- check whether RELEASE version also uses signingConfig (project configuration);
+- check whether there are correct SHA1 and SHA256 fingeprints used (Firebase project configuration).
 2. build.gradle file (pay attention, debuggable = false, keyAlias = key2)
 ```
 android {
@@ -69,6 +69,7 @@ buildTypes {
     }
 ```
 # What to do in case you forgot your key/keystore passwords?
+In case [original guide](https://support.google.com/googleplay/android-developer/answer/9842756) was quite hard for you to master, feel free to follow these steps:
 1. Go to Google Console, select "change signing key" and then "from Java storage". Be careful, you gotta use two different key aliases from your keystore, key1 and key2.
 2. Install newest [JDK](https://jdk.java.net/22/) and open the folder with your JDK in PowerShell. For example:
 ```
@@ -79,8 +80,15 @@ cd E:\Java\jdk-22.0.1\bin
 ```
 .\java -jar "E:\path\to\pepk.jar" --keystore="E:\path\to\keystore.jks" --alias=key1 --output="E:\path\to\output.zip" --include-cert --rsa-aes-encryption --encryption-key-path="E:\path\to\encryption_public_key.pem"
 ```
-5. Create a new key alias during RELEASE bundle build. Create a new upload key, key2. ATTENTION! YOU'LL USE KEY #2 HERE.
+Once finished, upload created zip archive.
+
+5. Create a new key alias (key2) during RELEASE bundle build. Use the following command to create an upload key certificate. ATTENTION! YOU'LL USE KEY #2 HERE.
 ```
-.\keytool -export -rfc -keystore "E:\path\to\keystore.jks" -alias key2 -file "E:\path\to\encryption_public_key.pem"
+.\keytool -export -rfc -keystore "E:\path\to\keystore.jks" -alias key2 -file "E:\path\to\upload_certificate.pem"
 ```
-MAJOR WARNING, ONCE AGAIN: YOU'LL USE KEY #1 TO ENCRYPT PRIVATE KEY AND KEY #2 AS AN UPLOAD KEY. YOU'LL ALSO USE KEY #2 IN SIGNINGCONFIG. ONCE YOU CHANGE KEY ALIAS, SHA1 AND SHA256 WILL ALSO CHANGE, SO ADD FINGERPRINTS TO FIREBASE CONFIGURATION ONLY AFTER COMPLETING ALL THE PREVIOUS STEPS.
+Once finished, upload created certificate.
+
+***MAJOR WARNING, ONCE AGAIN: YOU'LL USE KEY #1 TO ENCRYPT PRIVATE KEY AND KEY #2 AS AN UPLOAD KEY. YOU'LL ALSO USE KEY #2 IN SIGNINGCONFIG. ONCE YOU CHANGE KEY ALIAS, SHA1 AND SHA256 WILL ALSO CHANGE, SO ADD FINGERPRINTS TO FIREBASE CONFIGURATION ONLY AFTER COMPLETING ALL THE PREVIOUS STEPS.***
+
+---
+### If these pieces of advice were helpful for you, please share this repo with other devs who may also encountered the same problem. Would appreciate a [humble donation](https://buymeacoffee.com/archexalt) :)
