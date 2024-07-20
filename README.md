@@ -93,4 +93,8 @@ Once finished, upload created certificate.
 ***MAJOR WARNING, ONCE AGAIN: YOU'LL USE KEY #1 TO ENCRYPT PRIVATE KEY AND KEY #2 AS AN UPLOAD KEY. YOU'LL ALSO USE KEY #2 IN SIGNINGCONFIG. ONCE YOU CHANGE KEY ALIAS, SHA1 AND SHA256 FINGERPRINTS ALSO WILL BE CHANGED, SO ADD BOTH OF THEM TO FIREBASE CONFIGURATION ONLY AFTER COMPLETING ALL THE PREVIOUS STEPS.***
 
 ---
-### If these pieces of advice were helpful for you, please share this repo with other devs who may also encountered the same problem. Would appreciate a [humble donation](https://buymeacoffee.com/archexalt) :)
+### If these pieces of advice were helpful for you, please share this repo with other devs who also encountered the same problem. 
+
+If you would like to support me:
+
+<a href="https://www.buymeacoffee.com/archexalt" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/arial-red.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" ></a>
