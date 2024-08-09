@@ -16,15 +16,15 @@ dependencies {
     implementation 'androidx.fragment:fragment-ktx:1.8.1'
     implementation 'androidx.credentials:credentials:1.2.2'
     implementation 'androidx.credentials:credentials-play-services-auth:1.2.2'
-    implementation 'com.google.gms:google-services:4.4.2'
+    //implementation 'com.google.gms:google-services:4.4.2'
     implementation 'com.google.android.material:material:1.12.0'
-    implementation 'com.google.android.gms:play-services-appset:16.1.0'
-    implementation 'com.google.android.gms:play-services-auth:21.2.0'
-    implementation 'com.google.android.gms:play-services-base:18.5.0'
-    implementation 'com.google.android.gms:play-services-cronet:18.1.0'
+    //implementation 'com.google.android.gms:play-services-appset:16.1.0'
+    //implementation 'com.google.android.gms:play-services-auth:21.2.0'
+    //implementation 'com.google.android.gms:play-services-base:18.5.0'
+    //implementation 'com.google.android.gms:play-services-cronet:18.1.0'
     implementation 'com.google.android.libraries.identity.googleid:googleid:1.1.1'
     implementation 'com.google.firebase:firebase-auth:23.0.0'
-    implementation 'com.google.firebase:firebase-database:21.0.0'
+    //implementation 'com.google.firebase:firebase-database:21.0.0'
     implementation 'com.github.bumptech.glide:glide:4.12.0'
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.2.1'
@@ -97,4 +97,4 @@ Once finished, upload created certificate.
 
 If you would like to support me:
 
-<a href="https://www.buymeacoffee.com/archexalt" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/arial-red.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" ></a>
+<a href='https://ko-fi.com/P5P011M9VJ' target='_blank'><img height='36' style='border:0px;height:64px;' src='https://storage.ko-fi.com/cdn/kofi3.png?v=3' border='0' alt='Buy Me a Coffee at ko-fi.com' /></a>
